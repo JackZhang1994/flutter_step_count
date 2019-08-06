@@ -1,4 +1,5 @@
 #import "FlutterStepCountPlugin.h"
+#import "StepCountUtils.h"
 
 @implementation FlutterStepCountPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -10,8 +11,11 @@
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
+  if ([@"getStepCount" isEqualToString:call.method]) {
+      StepCountUtils *vc = [[StepCountUtils alloc] init];
+      [vc getStepCountWithReslut:^(NSString * _Nonnull step) {
+          result(step);
+      }];
   } else {
     result(FlutterMethodNotImplemented);
   }

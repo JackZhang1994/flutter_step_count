@@ -17,6 +17,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+#  flutter_step_count:
+#    git:
+#      url: 'https://github.com/jackzhang1994/flutter_step_count.git'
+#      ref: 0.0.1
+
   flutter_step_count:
     path: ../
 

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.multidex.MultiDex;
-import android.util.Log;
 
 import com.today.step.lib.ISportStepInterface;
 import com.today.step.lib.TodayStepManager;
@@ -107,7 +106,7 @@ public abstract class StepApplication extends FlutterApplication
     {
       try
       {
-        Log.d("步数", String.valueOf(iSportStepInterface.getCurrentTimeSportStep()));
+//        Log.d("步数", String.valueOf(iSportStepInterface.getCurrentTimeSportStep()));
         return iSportStepInterface.getCurrentTimeSportStep();
       } catch (RemoteException e)
       {
@@ -124,7 +123,7 @@ public abstract class StepApplication extends FlutterApplication
 
   private void initStepCount()
   {
-    Log.d("步数", "初始化计步器");
+//    Log.d("步数", "初始化计步器");
 
     //初始化计步模块
     TodayStepManager.startTodayStepService(getApplication());
@@ -139,14 +138,14 @@ public abstract class StepApplication extends FlutterApplication
       public void onServiceConnected(ComponentName name, IBinder service)
       {
         //Activity和Service通过aidl进行通信
-        Log.d("步数", "service绑定");
+//        Log.d("步数", "service绑定");
         iSportStepInterface = ISportStepInterface.Stub.asInterface(service);
       }
 
       @Override
       public void onServiceDisconnected(ComponentName name)
       {
-        Log.d("步数", "onServiceDisconnected");
+//        Log.d("步数", "onServiceDisconnected");
       }
     }, Context.BIND_AUTO_CREATE);
   }
