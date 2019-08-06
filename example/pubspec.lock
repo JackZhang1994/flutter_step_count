@@ -45,8 +45,8 @@ packages:
     dependency: "direct dev"
     description:
       path: "."
-      ref: "0.0.2"
-      resolved-ref: "7b2ceb403c51393cd757e6302b606e9ccfaae88d"
+      ref: "0.0.2+1"
+      resolved-ref: "340a8980d22bb9050dc257c20208f1ae42fafe90"
       url: "https://github.com/jackzhang1994/flutter_step_count.git"
     source: git
     version: "0.0.1"
