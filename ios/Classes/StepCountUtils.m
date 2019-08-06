@@ -6,20 +6,14 @@
 //  Copyright © 2019 The Chromium Authors. All rights reserved.
 //
 
-#import "StepCountViewController.h"
+#import "StepCountUtils.h"
 #import <HealthKit/HealthKit.h>
 
-@interface StepCountViewController ()
+@interface StepCountUtils ()
 @property (nonatomic,strong) HKHealthStore *healthStore;
 @end
 
-@implementation StepCountViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-}
+@implementation StepCountUtils
 
 - (void)getStepCountWithReslut:(StepBlock) stepBlock {
     self.stepBlock = stepBlock;

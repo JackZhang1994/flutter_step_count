@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^StepBlock)(NSString *step);
 
-@interface StepCountViewController : UIViewController
+@interface StepCountUtils : NSObject
 
 @property(nonatomic, copy) StepBlock stepBlock;
 @property(nonatomic, copy) NSString *step;
