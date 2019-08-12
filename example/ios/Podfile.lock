@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_step_count/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
-  flutter_step_count: 551a865d901f2a7a3e2ae9e000f94f9aafa260e3
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_step_count: 7ea470e9593d93b9b2b8a4cc30a815372a1b3224
 
 PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.5

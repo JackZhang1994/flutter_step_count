@@ -3,7 +3,7 @@ description: Demonstrates how to use the flutter_step_count plugin.
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -20,7 +20,7 @@ dev_dependencies:
   flutter_step_count:
     git:
       url: 'https://github.com/jackzhang1994/flutter_step_count.git'
-      ref: 0.0.2+1
+      ref: 0.0.2+2
 #
 #  flutter_step_count:
 #    path: ../
