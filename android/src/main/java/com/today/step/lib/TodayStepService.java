@@ -1,16 +1,11 @@
 package com.today.step.lib;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
@@ -22,8 +17,6 @@ import android.text.TextUtils;
 
 import com.andrjhf.lib.jlogger.JLoggerConstant;
 import com.andrjhf.lib.jlogger.JLoggerWraper;
-import com.andrjhf.notification.api.compat.NotificationApiCompat;
-import com.jvtd.flutter_step_count.R;
 
 import org.json.JSONArray;
 
@@ -102,8 +95,8 @@ public class TodayStepService extends Service implements Handler.Callback
    */
   private TodayStepCounter mStepCounter;
 
-  private NotificationManager nm;
-  private NotificationApiCompat mNotificationApiCompat;
+//  private NotificationManager nm;
+//  private NotificationApiCompat mNotificationApiCompat;
 
   private boolean mSeparate = false;
   private boolean mBoot = false;
@@ -211,53 +204,53 @@ public class TodayStepService extends Service implements Handler.Callback
   private synchronized void initNotification(int currentStep)
   {
 
-    nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-    int smallIcon = getResources().getIdentifier("icon_step_small", "mipmap", getPackageName());
-    if (0 == smallIcon)
-    {
-      smallIcon = R.mipmap.ic_launcher;
-    }
-    String receiverName = getReceiver(getApplicationContext());
-    PendingIntent contentIntent = PendingIntent.getBroadcast(this, BROADCAST_REQUEST_CODE, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
-    if (!TextUtils.isEmpty(receiverName))
-    {
-      try
-      {
-        contentIntent = PendingIntent.getBroadcast(this, BROADCAST_REQUEST_CODE, new Intent(this, Class.forName(receiverName)), PendingIntent.FLAG_UPDATE_CURRENT);
-      } catch (Exception e)
-      {
-        e.printStackTrace();
-        contentIntent = PendingIntent.getBroadcast(this, BROADCAST_REQUEST_CODE, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
-      }
-    }
-//        String km = getDistanceByStep(currentStep);
-//        String calorie = getCalorieByStep(currentStep);
-//        String contentText = calorie + " 千卡  " + km + " 公里";
-    int largeIcon = getResources().getIdentifier("ic_launcher", "mipmap", getPackageName());
-    Bitmap largeIconBitmap = null;
-    if (0 != largeIcon)
-    {
-      largeIconBitmap = BitmapFactory.decodeResource(getResources(), largeIcon);
-    } else
-    {
-      largeIconBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-    }
-    mNotificationApiCompat = new NotificationApiCompat.Builder(this,
-            nm,
-            STEP_CHANNEL_ID,
-            getString(R.string.step_channel_name),
-            smallIcon)
-            .setContentIntent(contentIntent)
-            .setContentTitle("温馨提示")
-            .setContentText("正在启动计步服务")
-            .setTicker(getString(R.string.app_name))
-            .setOngoing(true)
-            .setPriority(Notification.PRIORITY_MIN)
-            .setLargeIcon(largeIconBitmap)
-            .setOnlyAlertOnce(true)
-            .builder();
-    mNotificationApiCompat.startForeground(this, NOTIFY_ID);
-    mNotificationApiCompat.notify(NOTIFY_ID);
+//    nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//    int smallIcon = getResources().getIdentifier("icon_step_small", "mipmap", getPackageName());
+//    if (0 == smallIcon)
+//    {
+//      smallIcon = R.mipmap.ic_launcher;
+//    }
+//    String receiverName = getReceiver(getApplicationContext());
+//    PendingIntent contentIntent = PendingIntent.getBroadcast(this, BROADCAST_REQUEST_CODE, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
+//    if (!TextUtils.isEmpty(receiverName))
+//    {
+//      try
+//      {
+//        contentIntent = PendingIntent.getBroadcast(this, BROADCAST_REQUEST_CODE, new Intent(this, Class.forName(receiverName)), PendingIntent.FLAG_UPDATE_CURRENT);
+//      } catch (Exception e)
+//      {
+//        e.printStackTrace();
+//        contentIntent = PendingIntent.getBroadcast(this, BROADCAST_REQUEST_CODE, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
+//      }
+//    }
+////        String km = getDistanceByStep(currentStep);
+////        String calorie = getCalorieByStep(currentStep);
+////        String contentText = calorie + " 千卡  " + km + " 公里";
+//    int largeIcon = getResources().getIdentifier("ic_launcher", "mipmap", getPackageName());
+//    Bitmap largeIconBitmap = null;
+//    if (0 != largeIcon)
+//    {
+//      largeIconBitmap = BitmapFactory.decodeResource(getResources(), largeIcon);
+//    } else
+//    {
+//      largeIconBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+//    }
+//    mNotificationApiCompat = new NotificationApiCompat.Builder(this,
+//            nm,
+//            STEP_CHANNEL_ID,
+//            getString(R.string.step_channel_name),
+//            smallIcon)
+//            .setContentIntent(contentIntent)
+//            .setContentTitle("温馨提示")
+//            .setContentText("正在启动计步服务")
+//            .setTicker(getString(R.string.app_name))
+//            .setOngoing(true)
+//            .setPriority(Notification.PRIORITY_MIN)
+//            .setLargeIcon(largeIconBitmap)
+//            .setOnlyAlertOnce(true)
+//            .builder();
+//    mNotificationApiCompat.startForeground(this, NOTIFY_ID);
+//    mNotificationApiCompat.notify(NOTIFY_ID);
 
   }
 
@@ -442,13 +435,13 @@ public class TodayStepService extends Service implements Handler.Callback
    */
   private synchronized void updateNotification(int stepCount)
   {
-    if (null != mNotificationApiCompat)
-    {
-//            String km = getDistanceByStep(stepCount);
-//            String calorie = getCalorieByStep(stepCount);
-//            String contentText = calorie + " 千卡  " + km + " 公里";
-      mNotificationApiCompat.updateNotification(NOTIFY_ID, "温馨提示", "正在启动计步服务");
-    }
+//    if (null != mNotificationApiCompat)
+//    {
+////            String km = getDistanceByStep(stepCount);
+////            String calorie = getCalorieByStep(stepCount);
+////            String contentText = calorie + " 千卡  " + km + " 公里";
+//      mNotificationApiCompat.updateNotification(NOTIFY_ID, "温馨提示", "正在启动计步服务");
+//    }
   }
 
   private boolean getStepCounter()

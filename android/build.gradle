@@ -31,17 +31,9 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-
-    //分包
-    multiDexEnabled true
 }
 
 dependencies {
-    compileOnly files('libs/flutter.jar')
-    //noinspection GradleDynamicVersion
-    implementation "com.android.support:support-v4:28+"
-    //noinspection GradleDynamicVersion
-    implementation "com.android.support:appcompat-v7:28+"
-    //multidex支持依赖
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation "com.android.support:support-v4:28.0.0"
+    implementation "com.android.support:appcompat-v7:28.0.0"
 }

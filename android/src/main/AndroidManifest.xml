@@ -1,29 +1,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jvtd.flutter_step_count">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
-    <!-- 协处理器计步权限 -->
-    <uses-feature
-        android:name="android.hardware.sensor.stepcounter"
-        android:required="true" />
-    <uses-feature
-        android:name="android.hardware.sensor.stepdetector"
-        android:required="true" />
-
     <application>
 
-        <receiver
-            android:name=".MyReceiver"
-            android:enabled="true"
-            android:exported="true"/>
-
         <!--计步Service-->
+        <receiver
+            android:name="com.today.step.lib.TodayStepBootCompleteReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!--开机自启动-->
+        <receiver android:name="com.today.step.lib.TodayStepShutdownReceiver">
+            <intent-filter>
+                <!-- 关机广播 -->
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 关机广播 -->
         <service
             android:name="com.today.step.lib.TodayStepService"
             android:enabled="true"
@@ -44,23 +42,20 @@
             </intent-filter>
         </service>
 
-        <!--开机自启动-->
-        <receiver
-            android:name="com.today.step.lib.TodayStepBootCompleteReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <!-- 关机广播 -->
-        <receiver android:name="com.today.step.lib.TodayStepShutdownReceiver">
-            <intent-filter>
-                <!-- 关机广播 -->
-                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-            </intent-filter>
-        </receiver>
-
     </application>
+    <uses-feature
+        android:name="android.hardware.sensor.stepdetector"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.sensor.stepcounter"
+        android:required="true" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- 协处理器计步权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 </manifest>
